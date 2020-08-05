@@ -1,5 +1,5 @@
 var target = document.getElementById("one");
-fetch('categories-mock.json', {
+fetch('mocks/categories-mock.json', {
   mode : "no-cors"
 }).then(function (response) {
   return response.json();

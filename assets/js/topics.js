@@ -1,5 +1,5 @@
 var target = document.getElementById("cd-timeline");
-fetch('topics-mock.json', {
+fetch('mocks/topics-mock.json', {
   mode : "no-cors"
 }).then(function (response) {
   return response.json();

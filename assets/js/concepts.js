@@ -1,5 +1,5 @@
 var target = document.getElementById("two");
-fetch('concepts-mock.json', {
+fetch('mocks/concepts-mock.json', {
   mode : "no-cors"
 }).then(function (response) {
   return response.json();
