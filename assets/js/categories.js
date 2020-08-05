@@ -1,5 +1,5 @@
 var target = document.getElementById("one");
-fetch('https://blog-service.herokuapp.com/category/', {
+fetch('categories-mock.json', {
   mode : "no-cors"
 }).then(function (response) {
   return response.json();
