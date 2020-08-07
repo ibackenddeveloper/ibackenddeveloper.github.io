@@ -1,5 +1,5 @@
-//const host = "http://localhost:8090";
-const host = "https://blog-service.herokuapp.com/";
+const host = "http://localhost:8090";
+//const host = "https://blog-service.herokuapp.com/";
 function callCategories() {
     var target = document.getElementById("one");
     
@@ -18,7 +18,7 @@ function callCategories() {
         var row = `<article> 
                 <span class="image"> <img src="images/pic0`+index+`.jpg" alt="" /> </span> 
                 <header class="major"> 
-                <h3><a href="concepts.html?`+element["categoryName"] + "&" +endPoint+"1"+toEndPoint+`" class="link">`+element["categoryName"]+`</a></h3> 
+                <h3><a href="concepts.html?`+element["categoryName"] + "&" +endPoint+element["id"]+toEndPoint+`" class="link">`+element["categoryName"]+`</a></h3> 
                 <p>`+element["shortDescription"]+`</p> 
                 </header>
             </article>`;
@@ -32,11 +32,14 @@ function callCategories() {
 
 function callConcepts() {
     var target = document.getElementById("two");
-    //var host = "http://localhost:8090";
     params = location.search.substr(1).split("&");
     var endPoint = params[1];
     console.log(endPoint);
+    
+    
     window.document.title = decodeURI("I Backend Dev - " + params[0]);
+    document.getElementById("page-title").innerHTML = decodeURI(params[0]);
+
     var toEndPoint = "/topic/"
     fetch(host + endPoint).then(function (response) {
     return response.json();
@@ -46,7 +49,7 @@ function callConcepts() {
     for (let index = 0; index < obj.length; index++) {
         const element = obj[index];
         var row = `<section>
-                        <a href="topics.html?`+endPoint+"1"+toEndPoint+`" " class="image">
+                        <a href="topics.html?`+endPoint+element["id"]+toEndPoint+`" " class="image">
                             <img src="images/pic08.jpg" alt="" data-position="center center" />
                         </a>
                         <div class="content">
@@ -56,7 +59,7 @@ function callConcepts() {
                                 </header>
                                 <p>`+element["conceptShortDescription"]+`</p>
                                 <ul class="actions">
-                                    <li><a href="topics.html?`+endPoint+"1"+toEndPoint+`" class="button">Learn more</a></li>
+                                    <li><a href="topics.html?`+element["conceptName"] + "&" +endPoint+element["id"]+toEndPoint+`" class="button">Learn more</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -71,28 +74,32 @@ function callConcepts() {
 
 function callTopics() {
     var target = document.getElementById("cd-timeline");
-    //var host = "http://localhost:8090";
-    var endPoint = window.location.search.substr(1);
+    params = location.search.substr(1).split("&");
+    var endPoint = params[1];
+    console.log(endPoint);
+    
+    
+    window.document.title = decodeURI("I Backend Dev - " + params[0]);
+    document.getElementById("page-title").innerHTML = decodeURI(params[0]);
     console.log(endPoint);
     var toEndPoint = "/article/"
     fetch(host + endPoint).then(function (response) {
     return response.json();
     }).then(function (obj) {
     console.log(obj);
-    window.document.title = "Topic Name"
     for (let index = 0; index < obj.length; index++) {
         const element = obj[index];
         var row = `<div class="cd-timeline-block">
                         <div class="cd-timeline-img cd-picture">
                         </div>
 
-                        <a href="article.html?`+endPoint+"1"+toEndPoint+`">
+                        <a href="article.html?`+element["topicName"] + "&" +endPoint+element["id"]+toEndPoint+`">
                             <div class="cd-timeline-content">
                                 <h2>`+element["topicName"]+`</h2>
                                 <div class="timeline-content-info">
                                     <span class="timeline-content-info-date">
                                         <i class="fa fa-calendar-o" aria-hidden="true"></i>
-                                        30 June 2016
+                                        `+element["createdDate"].split("T")[0]+`
                                     </span>
                                 </div>
                             </div> <!-- cd-timeline-content -->
@@ -108,8 +115,13 @@ function callTopics() {
 
 function callArticles() {
     var target = document.getElementById("MyContent");
-    //var host = "http://localhost:8090";
-    var endPoint = window.location.search.substr(1);
+    params = location.search.substr(1).split("&");
+    var endPoint = params[1];
+    console.log(endPoint);
+    
+    
+    window.document.title = decodeURI("I Backend Dev - " + params[0]);
+    document.getElementById("page-title").innerHTML = decodeURI(params[0]);
     console.log(endPoint);
     fetch(host + endPoint).then(function (response) {
     return response.json();
