@@ -1,5 +1,5 @@
-const host = "http://localhost:8090";
-//const host = "https://blog-service.herokuapp.com/";
+//const host = "http://localhost:8090";
+const host = "https://blog-service.herokuapp.com/";
 function callCategories() {
     var target = document.getElementById("one");
     
